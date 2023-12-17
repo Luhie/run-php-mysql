@@ -1,2 +1,2 @@
-# run-php-mysql
-#Run PHP and MySQL
+# Run PHP and MySQL
+
