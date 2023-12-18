@@ -27,5 +27,6 @@
 - htmlspecialchars()
 
 ## 5. Topic update
-- create update file
+- create update/process_update file
 - create 파일에 불필요 코드 삭제 
+- settype()
