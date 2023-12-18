@@ -13,3 +13,7 @@
 - create form 생성
 - process_create 생성
 - error_log()
+
+## 4. Topic List
+- select.php 생성
+- var_dump()
