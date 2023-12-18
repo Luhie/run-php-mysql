@@ -22,3 +22,6 @@
 - while()
 - array()
 - isset()
+- mysqli_real_escape_string()
+- die()
+- htmlspecialchars()

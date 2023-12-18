@@ -5,6 +5,7 @@ $conn = mysqli_connect(
   'nlnl',
   'opentutorials'
 );
+
 $sql = "SELECT * FROM topic";
 $result = mysqli_query($conn, $sql);
 $list = '';
@@ -21,7 +22,8 @@ $article = array(
 );
 
 if(isset($_GET['id'])){
-  $sql = "SELECT * FROM topic WHERE id={$_GET['id']}";
+  $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
+  $sql = "SELECT * FROM topic WHERE id={$filtered_id}";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_array($result);
   $article['title'] = $row['title'];
