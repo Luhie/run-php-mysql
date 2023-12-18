@@ -25,3 +25,7 @@
 - mysqli_real_escape_string()
 - die()
 - htmlspecialchars()
+
+## 5. Topic update
+- create update file
+- create 파일에 불필요 코드 삭제 
