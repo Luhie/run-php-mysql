@@ -1,3 +1,11 @@
+<?php 
+$conn = mysqli_connect(
+  'localhost',
+  'root',
+  'nlnl',
+  'opentutorials'
+);
+?>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -7,7 +15,14 @@
 <body>
   <h1>WEB</h1>
   <ol>
-    <li>HTML</li>
+    <?php 
+      $sql = "SELECT * FROM topic";
+      $result = mysqli_query($conn, $sql);
+      while($row = mysqli_fetch_array($result)){
+        // echo '<li>'.$row['title'].'</li>';
+        echo "<li>{$row['title']}</li>";
+      }
+    ?>
   </ol>
   <a href="create.php">Create</a>
   <h2>Welcome</H2>
