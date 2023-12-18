@@ -19,3 +19,4 @@
 - var_dump()
 - mysqli_fetch_array()
 - print_r()
+- while()

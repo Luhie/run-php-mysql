@@ -21,55 +21,9 @@ echo '<h1>Multi row</h1>';
 $sql = "SELECT * FROM topic";
 $result = mysqli_query($conn, $sql);
 if($result){
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-  
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-  // var_dump($result->num_rows);
-
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-  // var_dump($result->num_rows);
-
-
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-  // var_dump($result->num_rows);
-
-
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-  // var_dump($result->num_rows);
-
-
-  $row = mysqli_fetch_array($result);
-  // print_r($row);
-  echo '<h2>'.$row['title'].'</h2>';
-  echo '<p>'.$row['description'].'</p>';
-  // var_dump($result->num_rows);
-
-  
-  var_dump($row);
+  while($row = mysqli_fetch_array($result)){
+    echo '<h2>'.$row['title'].'</h2>';
+    echo '<p>'.$row['description'].'</p>';
+  }
 }
 ?>
