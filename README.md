@@ -6,4 +6,5 @@
  
 ## 2. 데이터베이스 연결 및 insert 확인
 - mysqli_connection()
-- mysql_query()
+- mysqli_query()
+- mysqli_error()
