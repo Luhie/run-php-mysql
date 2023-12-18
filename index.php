@@ -5,6 +5,18 @@ $conn = mysqli_connect(
   'nlnl',
   'opentutorials'
 );
+$sql = "SELECT * FROM topic";
+$result = mysqli_query($conn, $sql);
+$list = '';
+while($row = mysqli_fetch_array($result)){
+  // <li><a href="index.php?id=19">MySQL</a></li>
+  // $list = $list."<li><a href=\"index.php?id=19\">{$row['title']}</a></li>";
+  $list = $list."<li><a href=\"index.php?id={$row['id']}\">{$row['title']}</a></li>";
+  // $list = $list."<li>{$row['title']}</li>";
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,14 +27,7 @@ $conn = mysqli_connect(
 <body>
   <h1>WEB</h1>
   <ol>
-    <?php 
-      $sql = "SELECT * FROM topic";
-      $result = mysqli_query($conn, $sql);
-      while($row = mysqli_fetch_array($result)){
-        // echo '<li>'.$row['title'].'</li>';
-        echo "<li>{$row['title']}</li>";
-      }
-    ?>
+    <?=$list?>
   </ol>
   <a href="create.php">Create</a>
   <h2>Welcome</H2>
