@@ -17,3 +17,5 @@
 ## 4. Topic List
 - select.php 생성
 - var_dump()
+- mysqli_fetch_array()
+- print_r()
