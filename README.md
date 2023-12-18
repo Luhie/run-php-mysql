@@ -8,3 +8,8 @@
 - mysqli_connection()
 - mysqli_query()
 - mysqli_error()
+
+## 3. Topic create 
+- create form 생성
+- process_create 생성
+- error_log()
