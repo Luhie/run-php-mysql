@@ -30,4 +30,8 @@
 - create update/process_update file
 - create 파일에 불필요 코드 삭제 
 - settype()
+
+## 6. 테이블간 연결 read 
 - LEFT JOIN 
+
+## 7. 테이블간 연결 create
