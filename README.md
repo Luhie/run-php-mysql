@@ -30,3 +30,4 @@
 - create update/process_update file
 - create 파일에 불필요 코드 삭제 
 - settype()
+- LEFT JOIN 
