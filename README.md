@@ -31,7 +31,7 @@
 - create 파일에 불필요 코드 삭제 
 - settype()
 
-## 6. 테이블간 연결 read 
+## 6. 테이블간 연결 read & create
 - LEFT JOIN 
 
-## 7. 테이블간 연결 create
+## 7. read authore table 
