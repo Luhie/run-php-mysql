@@ -38,10 +38,14 @@ $conn = mysqli_connect(
             <td><?=$filtered['profile']?></td>
           </tr>
           <?php
-
         }
       ?>
     </tr>
   </table>
+  <form action="process_create_author.php" method="post">
+    <p><input type="text" name="name" placeholder="name"></p>
+    <p><textarea name="profile" placeholder="profile"></textarea></p>
+    <p><input type="submit" value="Create author"></p>
+  </form>
 </body>
 </html>

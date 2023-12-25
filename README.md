@@ -35,3 +35,5 @@
 - LEFT JOIN 
 
 ## 7. read authore table 
+## 7. create authore table 
+- header()
