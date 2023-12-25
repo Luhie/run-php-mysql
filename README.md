@@ -34,6 +34,7 @@
 ## 6. 테이블간 연결 read & create
 - LEFT JOIN 
 
-## 7. read authore table 
-## 7. create authore table 
+## 7. read author table 
+## 8. create author table 
 - header()
+## 9. update author table 
