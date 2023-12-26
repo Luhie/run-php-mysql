@@ -1,6 +1,7 @@
 <?php
-  error_reporting(E_ALL);
-  ini_set("display_errors", 1);
+require("config/config.php");
+require("lib/db.php");
+$conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["db_name"]);
 
   $sql = "
       INSERt INTO topic (
@@ -12,8 +13,6 @@
       'MySQL is ....',
       NOW()
     )";
-
-  $conn = mysqli_connect("localhost", "root", "nlnl", "opentutorials");
 
   // print_r($conn);
 

@@ -8,7 +8,7 @@ $conn = mysqli_connect(
 
 settype($_POST['id'], 'integer');
 $filtered = array(
-  'id'=>mysqli_real_escape_string($conn, $_POST['id'])
+  'id'=>mysqli_real_escape_string($_POST['id'])
 );
 $sql = "
   DELETE 

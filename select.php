@@ -1,10 +1,7 @@
 <?php
-$conn = mysqli_connect(
-  'localhost',
-  'root',
-  'nlnl',
-  'opentutorials'
-);
+require("config/config.php");
+require("lib/db.php");
+$conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["db_name"]);
 
 echo '<h1>Single row</h1>';
 $sql = "SELECT * FROM topic WHERE id = 11";

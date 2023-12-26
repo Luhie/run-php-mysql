@@ -40,3 +40,7 @@
 ## 9. update author table 
 - exit
 - onsubmit
+
+## 10. module db info
+- require()
+- function()
