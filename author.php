@@ -37,6 +37,12 @@ $conn = mysqli_connect(
             <td><?=$filtered['name']?></td>
             <td><?=$filtered['profile']?></td>
             <td><a href="author.php?id=<?=$filtered['id']?>">update</a></td>
+            <td>
+            <form action="process_delete_author.php" method="post" onsubmit="if(!confirm('sure?')){return false;}">
+              <input type="hidden" name="id" value="<?=$filtered['id']?>">
+              <input type="submit" value="delete">
+            </form>
+            </td>
           </tr>
           <?php
         }
@@ -66,7 +72,7 @@ $conn = mysqli_connect(
     $form_id = '<input type="hidden" name="id" value='.$_GET['id'].'">';
   }
   ?>
-  <form action="<?=$form_action?>" method="post">
+  <form action="<?=$form_action?>" method="post" >
     <?=$form_id?>
     <p><input type="text" name="name" placeholder="name" value="<?=$escaped['name']?>"></p>
     <p><textarea name="profile" placeholder="profile" ><?=$escaped['profile']?></textarea></p>

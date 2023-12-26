@@ -38,3 +38,5 @@
 ## 8. create author table 
 - header()
 ## 9. update author table 
+- exit
+- onsubmit
