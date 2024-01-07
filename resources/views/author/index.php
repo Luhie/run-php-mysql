@@ -1,8 +1,8 @@
 <?php 
-require("config/config.php");
-require("lib/db.php");
-$conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["db_name"]);
-
+require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
+use \Database\Connection;
+$db = new Connection();
+$conn = $db->initDBConfig();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,8 +11,7 @@ $conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["
     <title>WEB</title>
 </head>
 <body>
-  <h1><a href="index.php">WEB</a></h1>
-  <p><a href="index.php">topic</a></p>
+  <h1><a href="../../../index.php">WEB</a></h1>
   <table border="1">
     <tr>
       <td>id</td>
@@ -32,9 +31,9 @@ $conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["
             <td><?=$filtered['id']?></td>
             <td><?=$filtered['name']?></td>
             <td><?=$filtered['profile']?></td>
-            <td><a href="author.php?id=<?=$filtered['id']?>">update</a></td>
+            <td><a href="index.php?id=<?=$filtered['id']?>">update</a></td>
             <td>
-            <form action="process_delete_author.php" method="post" onsubmit="if(!confirm('sure?')){return false;}">
+            <form action="delete.process.php" method="post" onsubmit="if(!confirm('sure?')){return false;}">
               <input type="hidden" name="id" value="<?=$filtered['id']?>">
               <input type="submit" value="delete">
             </form>
@@ -51,7 +50,7 @@ $conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["
     'profile' => ''
   );
   $lable_submit = 'Create Author';
-  $form_action = 'process_create_author.php';
+  $form_action = 'create.process.php';
   $form_id='';
   if(isset($_GET['id'])){
     $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
@@ -64,7 +63,7 @@ $conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["
     $escaped['name'] = htmlspecialchars($row['name']);
     $escaped['profile'] = htmlspecialchars($row['profile']);
     $lable_submit = 'Update Author';
-    $form_action = 'process_update_author.php';
+    $form_action = 'update.process.php';
     $form_id = '<input type="hidden" name="id" value='.$_GET['id'].'">';
   }
   ?>

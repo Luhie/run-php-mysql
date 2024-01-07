@@ -10,6 +10,6 @@ CREATE TABLE topic (
   PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
-SHOW TABELS;
+SHOW TABLES;
 
 DESC topic;

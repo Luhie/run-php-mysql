@@ -1,7 +1,8 @@
 <?php 
-require("config/config.php");
-require("lib/db.php");
-$conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["db_name"]);
+require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
+use \Database\Connection;
+$db = new Connection();
+$conn = $db->initDBConfig();
 
 $sql = "SELECT * FROM topic";
 $result = mysqli_query($conn, $sql);
@@ -36,7 +37,7 @@ $select_form .= '</select>';
   <ol>
     <?=$list?>
   </ol>
-  <form action="process_create.php" method="POST">
+  <form action="create.process.php" method="POST">
     <p><input type="text" name="title" placeholder="title"></p>
     <p><textarea name="description" placeholder="description"></textarea></p>
     <?=$select_form?>

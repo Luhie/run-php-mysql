@@ -1,7 +1,8 @@
 <?php
-require("config/config.php");
-require("lib/db.php");
-$conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["db_name"]);
+require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
+use \Database\Connection;
+$db = new Connection();
+$conn = $db->initDBConfig();
 
 $filtered = array(
   'name'=>mysqli_real_escape_string($conn, $_POST['name']),
@@ -23,7 +24,7 @@ if($result === false){
   error_log(mysqli_error($conn));
 }else{
   // echo 'Success <a href="index.php">Go to Home</a>';
-  header('Location: author.php');
+  header('Location: index.php');
 }
 /*
 print_r($result);

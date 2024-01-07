@@ -1,7 +1,8 @@
 <?php
-require("config/config.php");
-require("lib/db.php");
-$conn = db_init($config["host"], $config["db_user"], $config["db_pw"], $config["db_name"]);
+require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
+use \Database\Connection;
+$db = new Connection();
+$conn = $db->initDBConfig();
 
 settype($_POST['id'], 'integer');
 $filtered = array(
@@ -24,6 +25,6 @@ if($result === false){
   echo 'err';
   error_log(mysqli_error($conn));
 } else {
-  header('location: author.php?id='.$filtered['id']);
+  header('location: index.php?id='.$filtered['id']);
 }
 ?>
