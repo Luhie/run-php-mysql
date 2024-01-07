@@ -58,4 +58,4 @@
 ## Refactoring
 
 1. Moved DB connection into database
-2. Updated folder structor
+2. Updated folder structure

@@ -1,30 +1,12 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
-use \Database\Connection;
-$db = new Connection();
-$conn = $db->initDBConfig();
-
-$filtered = array(
-  'title'=>mysqli_real_escape_string($conn, $_POST['title']),
-  'description'=>mysqli_real_escape_string($conn, $_POST['description']),
-  'author_id'=>mysqli_real_escape_string($conn, $_POST['author_id'])
-);
-print_r($filtered['author_id']);
-$sql = "
-  INSERT INTO topic
-    (title, description, created, author_id)
-    VALUES(
-      '{$filtered['title']}',
-      '{$filtered['description']}',
-      NOW(),
-      '{$filtered['author_id']}'
-    )
-  ";
-$result = mysqli_query($conn, $sql);
-if($result === false){
-  echo 'Error';
-  error_log(mysqli_error($conn));
-} else {
-  echo 'Success <a href="../../../index.php">HOME</a>';
+use \Services\ArticleService;
+$articleService = new ArticleService();
+$result = $articleService->createArticle($_POST['title'], $_POST['description'],$_POST['author_id']);
+if($result) {
+  header("Location: http://localhost:3000/run-php-mysql/index.php");
+  // header("Location: http://localhost:3000/run-php-mysql/index.php");
+}else{
+  header("Location: http://localhost:3000/run-php-mysql/public/error.php");
 }
 ?>

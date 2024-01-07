@@ -1,12 +1,9 @@
 <?php
 namespace Database;
 use \Config\DBConfig;
+
 class Connection {
   function initDBConfig(){
-    // require_once(__DIR__.'/config/config.php');
-    // $url = $_SERVER["DOCUMENT_ROOT"]."/run-php-mysql/config/config.php";
-    // require_once($url);
-
     $config = new DBConfig();
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
