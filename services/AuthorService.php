@@ -60,6 +60,38 @@ class AuthorService{
       $this->conn->close();
     }
   }
+  function deleteAuthor($id)
+  {
+    $id = mysqli_real_escape_string($this->conn, $id);
+    $sql_topic = "
+      DELETE 
+        FROM topic
+        WHERE author_id = {$id}
+    ";
+    $sql_author = "
+      DELETE
+        FROM author
+        WHERE id = {$id}
+    ";
+    try{
+
+      mysqli_autocommit($this->conn,FALSE);
+      mysqli_query($this->conn, $sql_topic);
+      mysqli_query($this->conn, $sql_author);
+      if (!mysqli_commit($this->conn)){
+        echo "fail";
+        exit();
+      }
+
+      return mysqli_rollback($this->conn);
+      // return mysqli_query($this->conn, $sql);
+    }catch(Exception $e){
+      throw new Exception($e->getMessage());
+    }finally{
+      $this->conn->close();
+    }
+
+  }
 }
 
 ?>

@@ -1,39 +1,23 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
-use \Database\Connection;
-$db = new Connection();
-$conn = $db->initDBConfig();
+use \Services\AuthorService;
 
-  // 인자 확인
-  settype($_POST['id'], 'integer');
-  $filtered = array(
-    'id' =>mysqli_real_escape_string($conn, $_POST['id'])
-  );
-  
-  $sql = "
-    DELETE 
-      FROM topic
-      WHERE author_id = {$filtered['id']}
-  ";
-
-  mysqli_query($conn, $sql);
-
-  $sql = "
-    DELETE
-      FROM author
-      WHERE id = {$filtered['id']}
-  ";
-
-  // die($sql);
-  $result = mysqli_query($conn, $sql);
-  var_dump($result);
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  [
+    'id' => $id
+  ] = $_POST;
+}
+settype($id, 'integer');
+try{
+  $authorService = new AuthorService();
+  $result = $authorService->deleteAuthor($id);
 
   if($result === false) {
-    echo 'err';
-    error_log(mysqli_error($conn));
+    header("Location: http://localhost:3000/run-php-mysql/public/error.php");
   } else {
-    header('location: index.php');
+    header("Location: http://localhost:3000/run-php-mysql/resources/views/author/index.php");
   }
-
-
+}catch(Exception $e){
+  echo '<div>Message: ' .$e->getMessage().'</div>';
+}
 ?>
