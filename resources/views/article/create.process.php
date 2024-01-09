@@ -6,6 +6,6 @@ $result = $articleService->createArticle($_POST['title'], $_POST['description'],
 if($result) {
   header("Location: http://localhost:3000/run-php-mysql/index.php");
 }else{
-  header("Location: http://localhost:3000/run-php-mysql/public/error.php");
+  header("Location: http://localhost:3000/run-php-mysql/index.php");
 }
 ?>
