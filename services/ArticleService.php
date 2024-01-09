@@ -32,22 +32,32 @@ class ArticleService{
     if($result === false) error_log(mysqli_error($this->conn)); 
     return $result;
   }
-  function updateArticle($title, $description, $author_id)
+  function updateArticle($title, $description, $id)
   {
-    $filtered = array(
-      'title'=>mysqli_real_escape_string($this->conn, $title),
-      'description'=>mysqli_real_escape_string($this->conn, $description),
-      'author_id'=>mysqli_real_escape_string($this->conn, $author_id)
-    );
+    try{
+      $filtered = array(
+        'title'=>mysqli_real_escape_string($this->conn, $title),
+        'description'=>mysqli_real_escape_string($this->conn, $description),
+        'id'=>mysqli_real_escape_string($this->conn, $id)
+      );
 
-    $sql = "
-    UPDATE topic
-      SET
-        title = '{$filtered['title']}',
-        description = '{$filtered['description']}'
-      WHERE author_id = {$filtered['author_id']}
-    ";
-    $result = mysqli_query($this->conn, $sql);
+      $sql = "
+      UPDATE topic
+        SET
+          title = '{$filtered['title']}',
+          description = '{$filtered['description']}'
+        WHERE id = {$filtered['id']}
+      ";
+      return mysqli_query($this->conn, $sql);
+    }
+    catch(Exception $e)
+    {
+      throw new Exception($e->getMessage());
+    }
+    finally
+    {
+      $this->conn->close();
+    }
 
   }
   function deleteArticle($id){

@@ -8,17 +8,15 @@ $sql = "SELECT * FROM topic";
 $result = mysqli_query($conn, $sql);
 $list = '';
 while($row = mysqli_fetch_array($result)){
-  // <li><a href="index.php?id=19">MySQL</a></li>
-  // $list = $list."<li><a href=\"index.php?id=19\">{$row['title']}</a></li>";
   $escaped_title = htmlspecialchars($row['title']);
   $list = $list."<li><a href=\"index.php?id={$row['id']}\">{$escaped_title}</a></li>";
-  // $list = $list."<li>{$row['title']}</li>";
 }
 
 $article = array(
   'title'=>'Welcome',
   'description'=>'Hello, Web'
 );
+
 $update_link = '';
 if(isset($_GET['id'])){
   $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);

@@ -7,12 +7,9 @@ settype($_POST['id'], 'integer');
 try{
   $result = $articleService->updateArticle($_POST['title'], $_POST['description'],$_POST['id']);
   if($result === false){
-    echo 'Error';
-    error_log(mysqli_error($conn));
-    // print(mysqli_error($conn));
+    header("Location: http://localhost:3000/run-php-mysql/public/error.php");
   } else {
-    header('Location: http://localhost:3000/run-php-mysql/index.php');
-
+    header("Location: http://localhost:3000/run-php-mysql/resources/views/article/update.view.php?id={$_POST['id']}");
   }
 }
 catch(Exception $e){
