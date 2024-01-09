@@ -1,30 +1,23 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
-use \Database\Connection;
-$db = new Connection();
-$conn = $db->initDBConfig();
+use \Services\AuthorService;
+
+$authorService = new AuthorService();
 
 settype($_POST['id'], 'integer');
-$filtered = array(
-  'id' => mysqli_real_escape_string($conn, $_POST['id']),
-  'name' => mysqli_real_escape_string($conn, $_POST['name']),
-  'profile' => mysqli_real_escape_string($conn, $_POST['profile'])
-);
-
-$sql = "
-  UPDATE author
-    SET
-      name = '{$filtered['name']}',
-      profile = '{$filtered['profile']}'
-    WHERE
-      id = '{$filtered['id']}'
-"; 
-
-$result = mysqli_query($conn, $sql);
-if($result === false){
-  echo 'err';
-  error_log(mysqli_error($conn));
-} else {
-  header('location: index.php?id='.$filtered['id']);
+[
+  'id' => $id,
+  'name' => $name,
+  'profile' => $profile
+] = $_POST;
+try {
+  $result = $authorService->updateAuthor($id, $name, $profile);
+  if($result === false){
+    header("Location: http://localhost:3000/run-php-mysql/public/error.php");
+  } else {
+    header("Location: http://localhost:3000/run-php-mysql/resources/views/author/index.php?id={$id}");
+  }
+} catch (Exception $e) {
+  echo '<div>Message: ' .$e->getMessage().'</div>';
 }
 ?>

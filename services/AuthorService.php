@@ -36,22 +36,29 @@ class AuthorService{
       $this->conn->close();
     }
   }
-  function updateAuthor($name, $profile)
+  function updateAuthor($id, $name, $profile)
   {
-    $filtered = [
-      'name'=>mysqli_real_escape_string($conn,$name),
-      'profile'=>mysqli_real_escape_string($conn, $name)
-    ];
+    try{
+      $filtered = [
+        'id' => mysqli_real_escape_string($this->conn, $id),
+        'name' => mysqli_real_escape_string($this->conn, $name),
+        'profile' => mysqli_real_escape_string($this->conn, $profile)
+      ];
 
-    $sql = "
-    INSERT INTO author
-      (name, profile)
-      VALUES(
-        '{$filtered['name']}',
-        '{$filtered['profile']}'
-      )
-    ";
-
+      $sql = "
+        UPDATE author
+          SET
+            name = '{$filtered['name']}',
+            profile = '{$filtered['profile']}'
+          WHERE
+            id = '{$filtered['id']}'
+      "; 
+      return mysqli_query($this->conn, $sql);
+    }catch(Exception $e){
+      throw new Exception($e->getMessage());
+    }finally{
+      $this->conn->close();
+    }
   }
 }
 
