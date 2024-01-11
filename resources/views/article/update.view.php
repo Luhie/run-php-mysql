@@ -1,31 +1,19 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
-use \Database\Connection;
-$db = new Connection();
-$conn = $db->initDBConfig();
+require_once($_SERVER["DOCUMENT_ROOT"]."/run-php-mysql/resources/views/article/select.process.php");
+// require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
 
-$sql = "SELECT * FROM topic";
-$result = mysqli_query($conn, $sql);
-$list = '';
-while($row = mysqli_fetch_array($result)){
-  $escaped_title = htmlspecialchars($row['title']);
-  $list = $list."<li><a href=\"index.php?id={$row['id']}\">{$escaped_title}</a></li>";
-}
-
-$article = array(
-  'title'=>'Welcome',
-  'description'=>'Hello, Web'
-);
-
-$update_link = '';
-if(isset($_GET['id'])){
-  $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
-  $sql = "SELECT * FROM topic WHERE id={$filtered_id}";
-  $result = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_array($result);
-  $article['title'] = htmlspecialchars($row['title']);
-  $article['description'] = htmlspecialchars($row['description']);
-  $update_link = '<a href="update.php?id='.$_GET['id'].'">update</a>';
+// article list
+$list = getList();
+if(!isset($_GET['id'])){
+  $article = [
+    'title'=>'Welcome',
+    'description'=>'Hello, Web'
+  ];
+  $update_link = '';
+}else{
+  ["id" => $id] = $_GET;
+  $article = getDetail($id);
+  $update_link = '<a href="update.php?id='.$id.'">update</a>'; 
 }
 ?>
 <!DOCTYPE html>
@@ -35,14 +23,12 @@ if(isset($_GET['id'])){
     <title>WEB</title>
 </head>
 <body>
-  <h1>
-    <a href="index.php">WEB</a>
-  </h1>
+  <h1><a href="../../../index.php">WEB</a></h1>
   <ol>
     <?=$list?>
   </ol>
   <form action="update.process.php" method="POST">
-    <input type="hidden" name="id" value="<?=$_GET['id']?>">
+    <input type="hidden" name="id" value="<?=$id?>">
     <p><input type="text" name="title" placeholder='title' value="<?=$article['title']?>"></p>
     <p><textarea name="description" placeholder='description'><?=$article['description']?></textarea></p>
     <p><input type="submit"></p>

@@ -1,28 +1,8 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/run-php-mysql/Autoload.php");
-use \Database\Connection;
-$db = new Connection();
-$conn = $db->initDBConfig();
+require_once($_SERVER["DOCUMENT_ROOT"]."/run-php-mysql/resources/views/article/select.process.php");
 
-$sql = "SELECT * FROM topic";
-$result = mysqli_query($conn, $sql);
-$list = '';
-while($row = mysqli_fetch_array($result)){
-  // <li><a href="index.php?id=19">MySQL</a></li>
-  // $list = $list."<li><a href=\"index.php?id=19\">{$row['title']}</a></li>";
-  $escaped_title = htmlspecialchars($row['title']);
-  $list = $list."<li><a href=\"index.php?id={$row['id']}\">{$escaped_title}</a></li>";
-  // $list = $list."<li>{$row['title']}</li>";
-}
-
-$sql = "SELECT * FROM author";
-$result = mysqli_query($conn, $sql);
-$select_form = '<select name="author_id">';
-while($row = mysqli_fetch_array($result)){
-  $select_form .= '<option value="'.$row['id'].'" >'.$row['name'].'</option>';
-}
-// $select_form = $select_form.'</select>';
-$select_form .= '</select>';
+$list = getList();
+$select_form = getAuthorList();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,9 +11,7 @@ $select_form .= '</select>';
     <title>WEB</title>
 </head>
 <body>
-  <h1>
-    <a href="index.php">WEB</a>
-  </h1>
+  <h1><a href="../../../index.php">WEB</a></h1>
   <ol>
     <?=$list?>
   </ol>
